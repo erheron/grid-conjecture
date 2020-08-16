@@ -3,6 +3,15 @@ import argparse
 
 # Linear programming 
 def add_grid_constraints(solver, x, k):
+    """
+    solver:
+        linear solver from ortools.linear_solver
+    x:
+        matrix of solver's variables of size (k+1) x (k+1)
+    k:
+        size of a net == number of horizontal (vertical) lines
+        of a grid
+    """
     n = k+1
     for i in range(n):
         if i == 0 or i == k:
@@ -17,6 +26,15 @@ def add_grid_constraints(solver, x, k):
 
 
 def create_variables_with_basic_constraints(solver, x, k):
+    """
+    solver:
+        linear solver from ortools.linear_solver
+    x:
+        matrix of solver's variables of size (k+1) x (k+1)
+    k:
+        size of a net == number of horizontal (vertical) lines
+        of a grid
+    """
     # create variables
     n = k+1
     for i in range(n):
@@ -30,7 +48,19 @@ def create_variables_with_basic_constraints(solver, x, k):
 
 
 def add_subset_constraints(solver, subset, x, k):
-    # subset is a list of 4-tuples (x_ul, y_ur, x_br, y_br) e.g. rectangles
+    """
+    solver:
+        linear solver from ortools.linear_solver
+    subset:
+        list of rectangles in form "x1 y1 x2 y2"
+        where x1 and y1 denote the upper left corner
+        and x2, y2 denote the bottom right corner
+    x:
+        matrix of solver's variables of size (k+1) x (k+1)
+    k:
+        size of a net == number of horizontal (vertical) lines
+        of a grid
+    """
     for l in range(len(subset)//4):
         l2 = 4*l
         rect_coords = [(i,j) for i in range(subset[l2], subset[l2 + 2]+1)
