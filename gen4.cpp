@@ -1,3 +1,8 @@
+/*
+ * Generate set G for nets of size 4
+ *
+ * Bartosz Walczak, 2020
+ */
 #include <bitset>
 #include <iostream>
 #include <map>
